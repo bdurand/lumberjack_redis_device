@@ -12,7 +12,7 @@ The number of entries in the list can be capped with the `:limit` paramter on th
 ```ruby
 # create a device to save to the app.log key in redis
 # with a limit of 1000 entries that expires one hour after the last write.
-device = Lumberjack::RedisDevice.new("app.log", redis: Redis.new, limit: 1000, ttl: 3600)
+device = Lumberjack::Device::Redis.new("app.log", redis: Redis.new, limit: 1000, ttl: 3600)
 ```
 
 The log entries can then be read out again with the `read` method. The result will be an array of `Lumberjack::LogEntry` objects in the reverse order that they were written in (i.e. newest first).
