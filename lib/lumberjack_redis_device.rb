@@ -43,6 +43,18 @@ module Lumberjack
       docs.collect { |json| entry_from_json(json) }
     end
 
+    # Return true if the logs exist in redis. Will return false if the
+    # logs have expired.
+    def exists?
+      redis.exists(name)
+    end
+
+    # Return the timestamp of the last log entry.
+    def last_written_at
+      entry = read(1).first
+      entry.time if entry
+    end
+
     def datetime_format
       @time_formatter.format if @time_formatter
     end
@@ -118,7 +130,7 @@ module Lumberjack
     end
 
     def default_formatter
-      formatter = Formatter.new.clear
+      formatter = Lumberjack::Formatter.new.clear
       object_formatter = Lumberjack::Formatter::ObjectFormatter.new
       formatter.add(String, object_formatter)
       formatter.add(Object, object_formatter)

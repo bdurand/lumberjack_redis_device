@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Lumberjack::RedisDevice do
 
-  let(:entry_1) { Lumberjack::LogEntry.new(Time.now, Logger::INFO, "message 1", "test", 12345, "foo" => "bar", "baz" => "boo") }
-  let(:entry_2) { Lumberjack::LogEntry.new(Time.now, Logger::INFO, "message 2", "test", 12345, "foo" => "bar", "baz" => "boo") }
+  let(:entry_1) { Lumberjack::LogEntry.new(Time.at(Time.now.to_f.round(6)), Logger::INFO, "message 1", "test", 12345, "foo" => "bar", "baz" => "boo") }
+  let(:entry_2) { Lumberjack::LogEntry.new(Time.at(Time.now.to_f.round(6)), Logger::INFO, "message 2", "test", 12345, "foo" => "bar", "baz" => "boo") }
   let(:redis) { Redis.new }
 
   before :each do
-    redis.flushall
+    redis.flushdb
   end
 
   describe "redis" do
@@ -82,6 +82,26 @@ describe Lumberjack::RedisDevice do
       expect(device.read.size).to eq 1
       sleep(1.1)
       expect(device.read.size).to eq 0
+    end
+  end
+
+  describe "exists?" do
+    it "returns true if the log exists in redis" do
+      device = Lumberjack::RedisDevice.new(name: "lumberjack.log", redis: redis)
+      expect(device.exists?).to eq false
+      device.write(entry_1)
+      expect(device.exists?).to eq true
+    end
+  end
+
+  describe "last_written_at" do
+    it "returns the timestamp of the last entry" do
+      device = Lumberjack::RedisDevice.new(name: "lumberjack.log", redis: redis)
+      expect(device.last_written_at).to eq nil
+      device.write(entry_1)
+      expect(device.last_written_at).to eq entry_1.time
+      device.write(entry_2)
+      expect(device.last_written_at).to eq entry_2.time
     end
   end
 end
