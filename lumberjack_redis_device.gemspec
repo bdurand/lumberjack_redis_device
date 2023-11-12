@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = 'lumberjack_redis_device'
-  spec.version = File.read(File.expand_path("../VERSION", __FILE__)).strip
+  spec.version = File.read(File.join(__dir__, "VERSION")).strip
   spec.authors = ['Brian Durand']
   spec.email = ['bbdurand@gmail.com']
 
@@ -20,17 +20,17 @@ Gem::Specification.new do |spec|
     gemfiles/
     spec/
   )
-  spec.files = Dir.chdir(File.expand_path('..', __FILE__)) do
+  spec.files = Dir.chdir(__dir__) do
     `git ls-files -z`.split("\x0").reject{ |f| ignore_files.any?{ |path| f.start_with?(path) } }
   end
 
   spec.require_paths = ['lib']
 
+  spec.required_ruby_version = '>=2.4'
+
   spec.add_dependency "lumberjack", ">=1.1"
   spec.add_dependency "multi_json"
   spec.add_dependency "redis"
 
-  spec.add_development_dependency("rspec", ["~> 3.0"])
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "fakeredis"
+  spec.add_development_dependency "bundler"
 end
