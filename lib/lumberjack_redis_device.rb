@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 
-require 'lumberjack'
-require 'multi_json'
-require 'redis'
+require "lumberjack"
+require "multi_json"
+require "redis"
 
 module Lumberjack
   # This Lumberjack device logs output to a redis list. The redis list will automatically truncate
   # to a given size to prevent running out of memory on the server. This is not inteneded to be a
   # scalable logging solution, but it can be useful as an additional logging tool to expose recent logs.
   class RedisDevice < Device
-
     attr_reader :name, :ttl, :limit
 
     # Create a device. The name will be used as the key for the log entris in redis.
@@ -46,17 +45,21 @@ module Lumberjack
     # Return true if the logs exist in redis. Will return false if the
     # logs have expired.
     def exists?
-      redis.exists(name)
+      retval = redis.exists(name)
+      if retval.is_a?(Integer)
+        retval = (retval > 0)
+      end
+      retval
     end
 
     # Return the timestamp of the last log entry.
     def last_written_at
       entry = read(1).first
-      entry.time if entry
+      entry&.time
     end
 
     def datetime_format
-      @time_formatter.format if @time_formatter
+      @time_formatter&.format
     end
 
     def datetime_format=(format)
@@ -137,6 +140,5 @@ module Lumberjack
       formatter.add(Enumerable, Formatter::StructuredFormatter.new(formatter))
       formatter.add(Exception, Formatter::InspectFormatter.new)
     end
-
   end
 end

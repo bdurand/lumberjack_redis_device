@@ -1,3 +1,3 @@
 require "fakeredis"
 
-require_relative "../lib/lumberjack_redis_device.rb"
+require_relative "../lib/lumberjack_redis_device"

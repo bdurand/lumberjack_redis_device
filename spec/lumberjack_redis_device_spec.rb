@@ -1,7 +1,6 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Lumberjack::RedisDevice do
-
   let(:entry_1) { Lumberjack::LogEntry.new(Time.at(Time.now.to_f.round(6)), Logger::INFO, "message 1", "test", 12345, "foo" => "bar", "baz" => "boo") }
   let(:entry_2) { Lumberjack::LogEntry.new(Time.at(Time.now.to_f.round(6)), Logger::INFO, "message 2", "test", 12345, "foo" => "bar", "baz" => "boo") }
   let(:redis) { Redis.new }
