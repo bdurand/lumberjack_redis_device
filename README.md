@@ -1,7 +1,8 @@
 # Lumberjack Redis Device
 
-[![Build Status](https://travis-ci.org/bdurand/lumberjack_redis_device.svg?branch=master)](https://travis-ci.org/bdurand/lumberjack_redis_device)
-[![Maintainability](https://api.codeclimate.com/v1/badges/7785eba72f9a92b686b2/maintainability)](https://codeclimate.com/github/bdurand/lumberjack_redis_device/maintainability)
+[![Continuous Integration](https://github.com/bdurand/lumberjack_redis_device/actions/workflows/continuous_integration.yml/badge.svg)](https://github.com/bdurand/lumberjack_redis_device/actions/workflows/continuous_integration.yml)
+[![Regression Test](https://github.com/bdurand/lumberjack_redis_device/actions/workflows/regression_test.yml/badge.svg)](https://github.com/bdurand/lumberjack_redis_device/actions/workflows/regression_test.yml)
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/testdouble/standard)
 
 This is a simple reference implementation of a device for the [lumberjack](https://github.com/bdurand/lumberjack) to send logs to a data store.
 
