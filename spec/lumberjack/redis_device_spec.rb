@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 RSpec.describe Lumberjack::RedisDevice do
@@ -44,7 +46,7 @@ RSpec.describe Lumberjack::RedisDevice do
       expect(e.progname).to eq entry_2.progname
       expect(e.pid).to eq entry_2.pid
       expect(e.message).to eq entry_2.message
-      expect(e.tags).to eq entry_2.tags
+      expect(e.attributes).to eq entry_2.attributes
 
       expect(entries.last.message).to eq entry_1.message
     end
