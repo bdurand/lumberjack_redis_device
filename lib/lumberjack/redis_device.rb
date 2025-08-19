@@ -6,12 +6,12 @@ require "json"
 
 module Lumberjack
   # This Lumberjack device logs output to a redis list. The redis list will automatically truncate
-  # to a given size to prevent running out of memory on the server. This is not inteneded to be a
+  # to a given size to prevent running out of memory on the server. This is not intended to be a
   # scalable logging solution, but it can be useful as an additional logging tool to expose recent logs.
   class RedisDevice < Device
     attr_reader :name, :ttl, :limit
 
-    # Create a device. The name will be used as the key for the log entris in redis.
+    # Create a device. The name will be used as the key for the log entries in redis.
     #
     # The redis object can either be a `Redis` instance or a block that yields a `Redis`
     # instance.
