@@ -21,3 +21,37 @@ The log entries can then be read out again with the `read` method. The result wi
 ```ruby
 entries = device.read
 ```
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem "lumberjack_redis_device"
+```
+
+And then execute:
+```bash
+$ bundle
+```
+
+Or install it yourself as:
+```bash
+$ gem install lumberjack_redis_device
+```
+
+## Contributing
+
+Open a pull request on GitHub.
+
+Please use the [standardrb](https://github.com/testdouble/standard) syntax and lint your code with `standardrb --fix` before submitting.
+
+You'll need a redis server running to run the tests. You can spin one up using Docker:
+
+```bash
+$ docker run --rm -p 6379:6379 redis
+```
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

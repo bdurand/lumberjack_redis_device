@@ -1,4 +1,4 @@
-require "fakeredis"
+# frozen_string_literal: true
 
 require_relative "../lib/lumberjack_redis_device"
 
