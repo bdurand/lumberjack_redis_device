@@ -6,7 +6,12 @@
 
 This is a simple reference implementation of a device for the [lumberjack](https://github.com/bdurand/lumberjack) to send logs to a data store.
 
-Log data will be stored in a Redis list. This will likely not scale to handle permanent or large log storage, but it can be useful as a temporary store in log shipment, or as a debug tool for seeing only recent log entries.
+> [!WARNING]
+> This gem is not intended for high volume production use. It is intended to be a simple way to expose a smallish volume of logs from a remote system via Redis.
+>
+> In a high traffic system, the logs will roll over too quickly to be useful.
+>
+> It can be useful as a temporary store in log shipment, or as a debug tool for seeing only recent log entries.
 
 The number of entries in the list can be capped with the `:limit` paramter on the constructor. An expiration time can also be set on the redis key as well with the `:ttl` parameter.
 
