@@ -11,6 +11,12 @@ RSpec.describe Lumberjack::RedisDevice do
     redis.flushdb
   end
 
+  describe "registry" do
+    it "should register the device" do
+      expect(Lumberjack::DeviceRegistry.get(:redis)).to eq Lumberjack::RedisDevice
+    end
+  end
+
   describe "redis" do
     it "should use a redis connection" do
       device = Lumberjack::RedisDevice.new(name: "lumberjack.log", redis: redis)

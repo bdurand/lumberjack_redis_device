@@ -9,6 +9,8 @@ module Lumberjack
   # to a given size to prevent running out of memory on the server. This is not intended to be a
   # scalable logging solution, but it can be useful as an additional logging tool to expose recent logs.
   class RedisDevice < Device
+    DeviceRegistry.add(:redis, self)
+
     attr_reader :name, :ttl, :limit
 
     # Create a device. The name will be used as the key for the log entries in redis.
