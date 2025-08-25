@@ -13,7 +13,7 @@ RSpec.describe Lumberjack::RedisDevice do
 
   describe "registry" do
     it "should register the device" do
-      expect(Lumberjack::DeviceRegistry.get(:redis)).to eq Lumberjack::RedisDevice
+      expect(Lumberjack::DeviceRegistry.device_class(:redis)).to eq Lumberjack::RedisDevice
     end
   end
 
