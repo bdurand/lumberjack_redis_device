@@ -4,6 +4,7 @@ require "lumberjack"
 require "redis"
 require "json"
 
+# Lumberjack logging framework with device support for Redis
 module Lumberjack
   # This Lumberjack device logs output to a redis list. The redis list will automatically truncate
   # to a given size to prevent running out of memory on the server. This is not intended to be a
@@ -60,14 +61,20 @@ module Lumberjack
       entry&.time
     end
 
+    # Get the datetime format used for formatting time values in log entries.
+    # @return [String, nil] the datetime format string, or nil if no custom format is set
     def datetime_format
       @time_formatter&.format
     end
 
+    # Set the datetime format for formatting time values in log entries.
+    # @param format [String] the datetime format string to use for time formatting
     def datetime_format=(format)
       @time_formatter = Lumberjack::Formatter::DateTimeFormatter.new(format)
     end
 
+    # Get the Redis connection instance.
+    # @return [Redis] the Redis connection, either from the stored instance or by calling the proc
     def redis
       if @redis.is_a?(Proc)
         @redis.call
