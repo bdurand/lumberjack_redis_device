@@ -67,4 +67,4 @@ jobs:
         run:  bundle exec standardrb
       - name: yard
         if: matrix.yard == true
-        run:  bundle exec yard --fail-on-warnings
+        run:  bundle exec yard --fail-on-warning
