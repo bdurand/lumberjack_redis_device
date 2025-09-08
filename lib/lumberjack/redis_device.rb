@@ -10,6 +10,8 @@ module Lumberjack
   # to a given size to prevent running out of memory on the server. This is not intended to be a
   # scalable logging solution, but it can be useful as an additional logging tool to expose recent logs.
   class RedisDevice < Device
+    VERSION = ::File.read(::File.join(__dir__, "..", "..", "VERSION")).strip.freeze
+
     DeviceRegistry.add(:redis, self)
 
     attr_reader :name, :ttl, :limit

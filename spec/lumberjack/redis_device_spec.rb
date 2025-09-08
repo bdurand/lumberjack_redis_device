@@ -11,6 +11,12 @@ RSpec.describe Lumberjack::RedisDevice do
     redis.flushdb
   end
 
+  describe "VERSION" do
+    it "has a version number" do
+      expect(Lumberjack::RedisDevice::VERSION).not_to be nil
+    end
+  end
+
   describe "registry" do
     it "should register the device" do
       expect(Lumberjack::DeviceRegistry.device_class(:redis)).to eq Lumberjack::RedisDevice
