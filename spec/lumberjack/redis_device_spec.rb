@@ -1,12 +1,26 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
-describe Lumberjack::RedisDevice do
+RSpec.describe Lumberjack::RedisDevice do
   let(:entry_1) { Lumberjack::LogEntry.new(Time.at(Time.now.to_f.round(6)), Logger::INFO, "message 1", "test", 12345, "foo" => "bar", "baz" => "boo") }
   let(:entry_2) { Lumberjack::LogEntry.new(Time.at(Time.now.to_f.round(6)), Logger::INFO, "message 2", "test", 12345, "foo" => "bar", "baz" => "boo") }
   let(:redis) { Redis.new }
 
   before :each do
     redis.flushdb
+  end
+
+  describe "VERSION" do
+    it "has a version number" do
+      expect(Lumberjack::RedisDevice::VERSION).not_to be nil
+    end
+  end
+
+  describe "registry" do
+    it "should register the device" do
+      expect(Lumberjack::DeviceRegistry.device_class(:redis)).to eq Lumberjack::RedisDevice
+    end
   end
 
   describe "redis" do
@@ -44,7 +58,7 @@ describe Lumberjack::RedisDevice do
       expect(e.progname).to eq entry_2.progname
       expect(e.pid).to eq entry_2.pid
       expect(e.message).to eq entry_2.message
-      expect(e.tags).to eq entry_2.tags
+      expect(e.attributes).to eq entry_2.attributes
 
       expect(entries.last.message).to eq entry_1.message
     end
