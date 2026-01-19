@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Brian Durand"]
   spec.email = ["bbdurand@gmail.com"]
 
-  spec.summary = "A logging device for the lumberjack gem that writes log entries as JSON documentspec."
+  spec.summary = "A logging device for the lumberjack gem that writes log to redis for consolidated logging on very small deployments."
   spec.homepage = "https://github.com/bdurand/lumberjack_redis_device"
   spec.license = "MIT"
 
